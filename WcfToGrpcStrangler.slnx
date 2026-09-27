@@ -1,7 +1,13 @@
 <Solution>
+  <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/Serialization.Benchmarks/Serialization.Benchmarks.csproj" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/Legacy.Contracts/Legacy.Contracts.csproj" />
     <Project Path="src/Legacy.ErpHost/Legacy.ErpHost.csproj" />
     <Project Path="src/Modern.Facade/Modern.Facade.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Strangler.IntegrationTests/Strangler.IntegrationTests.csproj" />
   </Folder>
 </Solution>

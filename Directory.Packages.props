@@ -12,6 +12,8 @@
     <PackageVersion Include="CoreWCF.Primitives" Version="1.9.1" />
     <PackageVersion Include="System.ServiceModel.Http" Version="8.1.2" />
     <PackageVersion Include="System.ServiceModel.Primitives" Version="8.1.2" />
+    <!-- Patched over the vulnerable 8.0.3 pulled in transitively by the WCF stack. -->
+    <PackageVersion Include="System.Security.Cryptography.Xml" Version="9.0.20" />
 
     <!-- Modern facade: gRPC + resilience. -->
     <PackageVersion Include="Grpc.AspNetCore" Version="2.71.0" />
@@ -26,9 +28,11 @@
 
     <!-- Tests + benchmarks. -->
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.3" />
     <PackageVersion Include="xunit" Version="2.9.2" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2" />
     <PackageVersion Include="Shouldly" Version="4.2.1" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="BenchmarkDotNet" Version="0.14.0" />
   </ItemGroup>
 </Project>
