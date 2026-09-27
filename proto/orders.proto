@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option csharp_namespace = "Modern.Facade.Grpc";
+package orders;
+
+// The modern, high-speed internal contract. Same domain capabilities as the legacy SOAP service,
+// re-expressed in Protobuf. Money is carried as a string to preserve decimal precision (proto has
+// no decimal); timestamps as ISO-8601 strings to keep the mapping explicit.
+service OrderApi {
+  rpc GetOrder (GetOrderRequest) returns (OrderReply);
+  rpc ListOrdersByCustomer (ListByCustomerRequest) returns (OrderList);
+  rpc GetStockLevel (StockRequest) returns (StockReply);
+}
+
+message GetOrderRequest { string order_number = 1; }
+message ListByCustomerRequest { string customer_code = 1; }
+message StockRequest { string sku = 1; string warehouse = 2; }
+
+message OrderLine {
+  string sku = 1;
+  string description = 2;
+  int32 quantity = 3;
+  string unit_price = 4;
+}
+
+message Order {
+  string order_number = 1;
+  string customer_code = 2;
+  string status = 3;
+  string total = 4;
+  string placed_on_utc = 5;
+  repeated OrderLine lines = 6;
+}
+
+// found=false means the order does not exist (no gRPC error for a normal "not found").
+message OrderReply { bool found = 1; Order order = 2; }
+message OrderList { repeated Order orders = 1; }
+
+message StockReply {
+  string sku = 1;
+  string warehouse = 2;
+  int32 available = 3;
+  int32 reserved = 4;
+  // Which side served this read — "legacy-soap" or "modern" — so the strangler routing is visible.
+  string served_by = 5;
+}
